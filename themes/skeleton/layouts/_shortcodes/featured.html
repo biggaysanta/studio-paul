@@ -1,0 +1,18 @@
+{{/* 
+featured.html
+Generates an UL of featured items based upon the featured flag being set.
+*/}}
+
+<section>
+{{ $featured := where .Site.RegularPages "Params.featured" true }}
+    {{ if $featured }}
+    <ul>
+        {{ range $featured }}
+            <li class="featured"><a href="{{ .Permalink }}">{{.Title}}</a></li>
+        {{ end }}
+    </ul>
+    {{ else }}
+    <p>No featured items found.</p>
+    {{ end }}
+
+</section>

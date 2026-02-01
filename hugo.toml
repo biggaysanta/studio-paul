@@ -1,0 +1,15 @@
+baseURL = 'https://localhost:5713/'
+languageCode = 'en-us'
+title = 'Orthopraxis'
+theme = 'skeleton'
+[params]
+subtitle = 'The Art of Paul Brown'
+
+[[menu.main]]
+name = 'Home'
+pageRef = '/'
+title = 'return to home page'
+weight = 10
+
+[[build]]
+port = 5713
