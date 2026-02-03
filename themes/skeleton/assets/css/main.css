@@ -1,13 +1,1 @@
 @import "tailwindcss";
-@import "@casoon/atlas-styles";
-@layer base {
-  body {
-    @apply bg-neutral-900 text-slate-100 ;}
-
-    header footer { 
-      @apply cs-grid-auto-fit-lg cs-glass fixed top-1 left-1 my-10; }
-    nav {
-      @apply grid grid-cols-auto-fit-lg gap-4;
-      @apply cs-glass-bg-pink;
-    }
-  }

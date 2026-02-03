@@ -1,6 +1,6 @@
 {{- if hugo.IsDevelopment }}
-  <script type="module" src="http://localhost:5173/@vite/client"></script>
-  <script type="module" src="http://localhost:5173/themes/skeleton/assets/js/main.js"></script>
+  <script type="module" src="/@vite/client"></script>
+  <script type="module" src="/themes/skeleton/assets/js/main.js"></script>
 {{- else }}
 {{- with resources.Get "js/main.js" }}
   {{- $opts := dict

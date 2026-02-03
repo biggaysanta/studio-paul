@@ -1,0 +1,250 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "content",
+      "path": "[[workspace]]/content"
+    },
+    {
+      "title": "galleries",
+      "path": "[[workspace]]/content/galleries"
+    }
+  ],
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "date",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
+        },
+        {
+          "title": "Content preview",
+          "name": "preview",
+          "type": "image"
+        },
+        {
+          "title": "Draft",
+          "name": "draft",
+          "type": "boolean"
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags"
+        },
+        {
+          "title": "Categories",
+          "name": "categories",
+          "type": "categories"
+        },
+        {
+          "title": "weight",
+          "name": "weight",
+          "type": "number"
+        },
+        {
+          "title": "params",
+          "name": "params",
+          "type": "fields",
+          "fields": [
+            {
+              "title": "Subtitle",
+              "name": "subtitle",
+              "type": "string"
+            },
+            {
+              "title": "Tagline",
+              "name": "tagline",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "article",
+      "pageBundle": false,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "date",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
+        },
+        {
+          "title": "Expiration date",
+          "name": "expirydate",
+          "type": "datetime",
+          "default": ""
+        },
+        {
+          "title": "Content Preview",
+          "name": "preview",
+          "type": "image"
+        },
+        {
+          "title": "Draft",
+          "name": "draft",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags"
+        },
+        {
+          "title": "Categories",
+          "name": "categories",
+          "type": "categories"
+        },
+        {
+          "title": "weight",
+          "name": "weight",
+          "type": "number"
+        },
+        {
+          "title": "params",
+          "name": "params",
+          "type": "fields",
+          "fields": [
+            {
+              "title": "Subtitle",
+              "name": "-subtitle",
+              "type": "string"
+            },
+            {
+              "title": "Tagline",
+              "name": "-tagline",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "gallery",
+      "pageBundle": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "date",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
+        },
+        {
+          "title": "Content preview",
+          "name": "preview",
+          "type": "image"
+        },
+        {
+          "title": "Draft",
+          "name": "draft",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags"
+        },
+        {
+          "title": "Categories",
+          "name": "categories",
+          "type": "categories"
+        },
+        {
+          "title": "Gallery Images",
+          "name": "galleryImages",
+          "type": "list",
+          "actions": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Gallery Image",
+      "name": "galleryImage",
+      "type": "image",
+      "isListItem": true,
+      "parentField": "galleryImages",
+      "fields": [
+        {
+          "title": "Caption",
+          "name": "caption",
+          "type": "string"
+        },
+        {
+          "title": "Attribution",
+          "name": "attribution",
+          "type": "string",
+          "default": "Paul-Porter Brown"
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags"
+        },
+        {
+          "title": "Featured",
+          "name": "featured",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "title": "Weight",
+          "name": "weight",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "title": "Draft",
+          "name": "draft",
+          "type": "boolean",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "frontMatter.preview.host": "http://localhost:1313/",
+  "frontMatter.website.host": "https://paulbrown.studio/",
+  "frontMatter.framework.startCommand": "npx concurrently \"hugo server -D\" \"vite\""
+}
