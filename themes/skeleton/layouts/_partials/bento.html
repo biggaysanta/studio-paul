@@ -1,0 +1,28 @@
+{{/* Match all images inside the 'images' subfolder */}}
+{{ $images := .Resources.Match "images/*" }}
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-2">
+  {{ range $images }}
+    {{/* Calculate aspect ratio (Height / Width) */}}
+    {{ $ratio := div (float .Height) (float .Width) }}
+    
+    {{/* Map ratio to Tailwind row-spans for the "Bento" effect */}}
+    {{ $span := "row-span-1" }}
+    {{ if gt $ratio 1.5 }}
+      {{ $span = "row-span-3" }}
+    {{ else if gt $ratio 1.1 }}
+      {{ $span = "row-span-2" }}
+    {{ end }}
+
+    <div class="{{ $span }} overflow-hidden rounded-xl border border-slate-200">
+      <img 
+        src="{{ .RelPermalink }}" 
+        width="{{ .Width }}" 
+        height="{{ .Height }}" 
+        alt="{{ .Name }}"
+        class="h-full w-full object-cover"
+        loading="lazy"
+      >
+    </div>
+  {{ end }}
+</div>

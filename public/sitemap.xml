@@ -2,10 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2026-01-31T23:27:24+00:00</lastmod>
+    <loc>http://localhost:1313/categories/abstract/</loc>
+    <lastmod>2026-03-02T18:11:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/abstract-erotics/</loc>
+    <lastmod>2026-03-02T18:11:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/adobe-fresco/</loc>
+    <lastmod>2026-03-02T18:11:33-08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2026-03-02T18:11:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/digital-painting/</loc>
+    <lastmod>2026-03-02T18:11:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/galleries/subspace/</loc>
+    <lastmod>2026-03-02T18:11:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/galleries/</loc>
+    <lastmod>2026-03-02T14:21:18-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2026-01-31T23:27:24+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url>

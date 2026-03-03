@@ -2,12 +2,34 @@
 @import "@casoon/atlas-styles";
 @layer base {
   body {
-    @apply bg-neutral-900 text-slate-100 ;}
-
+    @apply bg-slate-900 text-slate-100 border-10 border-slate-100 p-10;
+    @apply flex flex-col min-h-screen;}
+    main {
+      @apply grow;
+    }
     header footer { 
-      @apply cs-grid-auto-fit-lg cs-glass fixed top-1 left-1 my-10; }
+      @apply fixed left-0 my-10; 
+    }
+    header {
+      @apply top-0;
+    }
+    header h1 {
+      @apply first-letter:font-extrabold first-letter:text-yellow-300 first-letter:text-8xl;
+    }
+
     nav {
-      @apply grid grid-cols-auto-fit-lg gap-4;
-      @apply cs-glass-bg-pink;
+      @apply flex my-10;
+      @apply w-full;
+      @apply border-b-[1px] border-yellow-700 rounded-b-full;
+      @apply pb-2;
+    }
+    nav ul {
+      @apply flex flex-col md:flex-row;
+      @apply w-full;
+    }
+    nav ul li {
+      @apply list-none;
+      @apply justify-between items-center-safe;
+      @apply max-w-full;
     }
   }

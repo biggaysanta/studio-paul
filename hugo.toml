@@ -10,6 +10,11 @@ name = 'Home'
 pageRef = '/'
 title = 'return to home page'
 weight = 10
+[[menu.main]]
+name = 'Gallery'
+pageRef = '/galleries'
+title = 'view the works'
+weight = 20
 
 [[build]]
 port = 5713
