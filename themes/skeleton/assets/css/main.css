@@ -20,7 +20,7 @@
     nav {
       @apply flex my-10;
       @apply w-full;
-      @apply border-b-[1px] border-yellow-700 rounded-b-full;
+      @apply border-b border-yellow-700 rounded-b-full;
       @apply pb-2;
     }
     nav ul {
