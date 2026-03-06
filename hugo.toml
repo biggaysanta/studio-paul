@@ -1,9 +1,7 @@
-baseURL = 'https://localhost:5713/'
+baseURL = 'https://127.0.0.1:1313/'
 languageCode = 'en-us'
 title = 'Orthopraxis'
 theme = 'skeleton'
-[params]
-subtitle = 'The Art of Paul Brown'
 
 [[menu.main]]
 name = 'Home'
@@ -15,6 +13,3 @@ name = 'Gallery'
 pageRef = '/galleries'
 title = 'view the works'
 weight = 20
-
-[[build]]
-port = 5713

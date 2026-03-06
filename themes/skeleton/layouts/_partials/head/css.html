@@ -1,4 +1,6 @@
-{{- if not hugo.IsDevelopment }}
+{{- if hugo.IsDevelopment }}
+  <link rel="stylesheet" href="/themes/skeleton/assets/css/main.css">
+{{- else }}
 {{- with resources.Get "css/main.css" }}
   {{- if hugo.IsDevelopment }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">

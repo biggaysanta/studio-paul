@@ -1,0 +1,23 @@
+{{/* 
+featured.html - pull up the featured articles (gallery image post) to display as masonry
+usage example: {{< featured '.' >}}
+easy peasy lemon squeezy
+*/}}
+
+{{ $featured := where .Site.RegularPages "Params.featured" true | sort "Date" "desc" }}
+{{ if gt (len $featured) 0 }}
+  <div class="featured-articles masonry">
+    {{ range $featured }}
+      <article class="masonry-item">
+        <a href="{{ .RelPermalink }}">
+          {{ with .Params.featured_image }}
+            <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+          {{ end }}
+          <h2>{{ .Title }}</h2>
+        </a>
+      </article>
+    {{ end }}
+  </div>
+{{ else }}
+  <p>No featured articles found.</p>
+{{ end }}
