@@ -1,0 +1,54 @@
+{{ $breakpoints := slice 640 768 1024 1280 1536 }}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-4">
+  {{ range .Resources.ByType "page" }}
+    {{ $page := . }}
+    {{/* Retrieve the image from the 'images' subfolder via front matter filename */}}
+    {{ $img := $.Resources.Get (printf "images/%s" .Params.filename) }}
+    
+    {{ if $img }}
+      {{/* Determine spans: Width > Height (Landscape) or Height > Width (Portrait) */}}
+      {{ $spanClasses := "col-span-1 row-span-1" }}
+      {{ if gt $img.Width (mul $img.Height 1.2) }}
+        {{ $spanClasses = "md:col-span-2 md:row-span-1" }}
+      {{ else if gt $img.Height (mul $img.Width 1.2) }}
+        {{ $spanClasses = "md:row-span-2 md:col-span-1" }}
+      {{ end }}
+
+      {{/* Build srcset: .Fit ensures the larger dimension matches the breakpoint */}}
+      {{ $srcset := slice }}
+      {{ range $breakpoints }}
+        {{ $opts := printf "%dx%d webp" . . }}
+        {{ $resized := $img.Fit $opts }}
+        {{ $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink .) }}
+      {{ end }}
+
+      {{/* Fallback image for src attribute */}}
+      {{ $fallback := $img.Fit "1024x1024 webp" }}
+
+      <article class="{{ $spanClasses }} flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white">
+        <div class="relative grow overflow-hidden">
+          <img 
+            src="{{ $fallback.RelPermalink }}"
+            srcset="{{ delimit $srcset ", " }}"
+            sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            width="{{ $img.Width }}"
+            height="{{ $img.Height }}"
+            alt="{{ $page.Title }}"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          >
+        </div>
+        
+        {{ if $page.Content }}
+          <div class="prose prose-sm p-4 text-slate-800">
+             {{/* Render page content below the image */}}
+             {{/* This allows for captions or descriptions to be included in the markdown file */}}
+             <h1>{{ $page.Title }}</h1>
+             {{ $page.Content }}
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+  {{ end }}
+</div>

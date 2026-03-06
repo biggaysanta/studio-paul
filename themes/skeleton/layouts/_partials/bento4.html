@@ -1,0 +1,57 @@
+{{ $breakpoints := slice 640 768 1024 1280 1536 }}
+
+{{/* Terminal Debug: Total pages found */}}
+{{ $subPages := .Resources.ByType "page" }}
+{{ if eq (len $subPages) 0 }}
+  {{ warnf "Masonry Debug: No sub-pages (Markdown files) found in bundle: %s" .File.Dir }}
+{{ end }}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-[masonry] gap-6">
+  {{ range $subPages }}
+    {{ $page := . }}
+    {{ $imgRelPath := printf "images/%s" .Params.filename }}
+    {{ $img := $.Resources.Get $imgRelPath }}
+    
+    {{ if $img }}
+      {{/* Terminal Debug: Successful image match */}}
+      {{ warnf "Masonry Debug: Matched %s to %s" $page.File.Path $img.RelPermalink }}
+
+      {{ $srcset := slice }}
+      {{ range $breakpoints }}
+        {{ $opts := printf "%dx%d webp" . . }}
+        {{ $resized := $img.Fit $opts }}
+        {{ $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink .) }}
+      {{ end }}
+      {{ $fallback := $img.Fit "1024x1024 webp" }}
+
+      <article class="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div class="relative">
+          <img 
+            src="{{ $fallback.RelPermalink }}"
+            srcset="{{ delimit $srcset ", " }}"
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            width="{{ $img.Width }}"
+            height="{{ $img.Height }}"
+            alt="{{ $page.Title }}"
+            class="h-auto w-full display-block"
+            loading="lazy"
+          >
+        </div>
+        
+        {{ if $page.Content }}
+          <div class="prose prose-sm p-4 text-slate-600">
+            {{ $page.Content }}
+          </div>
+        {{ end }}
+      </article>
+
+    {{ else }}
+      {{/* Terminal Debug: Missing image error */}}
+      {{ errorf "Masonry Debug: Failed to find image at '%s' for page '%s'" $imgRelPath $page.File.Path }}
+      
+      <div class="p-4 border-2 border-dashed border-red-500 text-red-500">
+        Debug: Missing image at {{ $imgRelPath }}
+      </div>
+    {{ end }}
+  {{ end }}
+</div>

@@ -8,7 +8,9 @@
     
     {{/* Map ratio to Tailwind row-spans for the "Bento" effect */}}
     {{ $span := "row-span-1" }}
-    {{ if gt $ratio 1.5 }}
+    {{ if gt $ratio 1.8 }}
+        {{ $span = "row-span-4" }}
+    {{ else if gt $ratio 1.5 }}
       {{ $span = "row-span-3" }}
     {{ else if gt $ratio 1.1 }}
       {{ $span = "row-span-2" }}

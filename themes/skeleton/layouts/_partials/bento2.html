@@ -1,0 +1,53 @@
+{{/* Define Tailwind breakpoints for srcset */}}
+{{ $breakpoints := slice 640 768 1024 1280 1536 }}
+{{ $pages := .Resources.ByType "page" }}
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-6">
+  {{ range $pages }}
+    {{ $page := . }}
+    {{ $imgResource := $.Resources.Get (printf "images/%s" .Params.filename) }}
+     {{ printf "Processing page resource: %s" $page.RelPermalink }}
+ 
+    
+    {{ if $imgResource }}
+    {{ printf "Found image resource: %s (Width: %d, Height: %d)" $imgResource.RelPermalink $imgResource.Width $imgResource.Height }}
+      {{/* 1. Calculate Ratio for Bento Spans */}}
+      {{ $ratio := div (float $imgResource.Height) (float $imgResource.Width) }}
+      {{ $span := "row-span-1" }}
+      {{ if gt $ratio 1.5 }}{{ $span = "row-span-3" }}
+      {{ else if gt $ratio 1.1 }}{{ $span = "row-span-2" }}{{ end }}
+
+      {{/* 2. Generate WebP Srcset (Fitting larger dimension) */}}
+      {{ $srcset := slice }}
+      {{ range $breakpoints }}
+        {{ printf "'Breakpoint %d'" . }}
+        {{ $tick := printf "%dx%d webp" . . }}
+        {{ $resized := $imgResource.Fit $tick }}
+        {{ $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink .) }}
+      {{ end }}
+
+      {{/* 3. Get Default Fallback (1024px) */}}
+      {{ $default := $imgResource.Fit "1024x1024 webp" }}
+
+      <article class="{{ $span }} flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-700">
+        <div class="relative grow overflow-hidden">
+          <img 
+            src="{{ $default.RelPermalink }}"
+            srcset="{{ delimit $srcset ','  }}"
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+            width="{{ $imgResource.Width }}"
+            height="{{ $imgResource.Height }}"
+            alt="{{ $page.Title }}"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          >
+        </div>
+        
+        {{ if $page.Content }}
+          <div class="text-sm p-4 text-slate-600">
+            {{ $page.Content }}
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+  {{ end }}
+</div>

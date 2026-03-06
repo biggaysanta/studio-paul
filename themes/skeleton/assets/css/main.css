@@ -31,5 +31,7 @@
       @apply list-none;
       @apply justify-between items-center-safe;
       @apply max-w-full;
+      @apply space-x-4;
+     
     }
   }
